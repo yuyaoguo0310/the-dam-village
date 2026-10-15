@@ -31,7 +31,7 @@ The current folder contains the complete editable project. The frontend has been
 - `server.mjs`: local server and persistent local storage.
 - `build.mjs` / `build-pages.mjs`: Worker and GitHub Pages builds.
 - `tests/`: original classroom, conditional-vote, role and story checks.
-- `drizzle/`, `wrangler.toml`, `.openai/hosting.json`: original database and hosting configuration.
+- `drizzle/`, `wrangler.toml`, `hosting-config/hosting.json`: original database and hosting configuration.
 
 With Node 18+ installed, run these commands from this folder (no dependency installation required):
 

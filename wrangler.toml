@@ -1,9 +1,13 @@
 name = "the-dam-village"
 main = "worker/index.js"
+workers_dev = true
 compatibility_date = "2026-10-13"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "dam-village"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "8bc36f4c-bed5-4f06-a475-add962f4f1ad"
 migrations_dir = "drizzle"
+
+[vars]
+PUBLIC_FRONTEND_ORIGINS = "https://yuyaoguo0310.github.io"

@@ -12,7 +12,7 @@ Interactive classroom stakeholder discussion about water, hydropower and alterna
 
 Host creates a classroom, saves their recovery key privately, and shares **Join QR** or the six-character room code. Four student stakeholder groups are balanced automatically. Guides join separately and do not vote. The host controls both votes, discussion, debate, anonymous change comparison and illustrative future animations.
 
-This GitHub Pages frontend connects to a persistent HTTPS backend for multi-device synchronization. The public browser address uses github.io. The backend is still hosted at the existing chatgpt.site origin; this is not a provider-independent backend migration.
+This GitHub Pages frontend connects to a persistent HTTPS backend for multi-device synchronization. The public browser address uses github.io. The backend is deployed to Cloudflare Workers at https://the-dam-village.yuyaoguo.workers.dev and uses a D1 database in the project owner’s Cloudflare account. Existing rooms in the previous backend are not automatically copied to this database.
 
 ## Original complete source
 
@@ -44,7 +44,7 @@ node build-pages.mjs
 
 Local entry: `http://localhost:8787/`; host: `/admin`; guides: `/guide`. The local server uses its own API and saves rooms in `.local/rooms.json`. That directory is private and ignored by Git.
 
-The root frontend retains the existing hosted backend for GitHub Pages. Upload `index.html`, `styles.css`, `qrcode.js` and `app.js` together. Alternatively, `node build-pages.mjs` copies them into `docs/`; set `DAM_API_ORIGIN` to use a different HTTPS backend, and configure its exact frontend-origin allowlist. `node build.mjs` embeds the split frontend into the self-contained Worker in `worker/index.js` and `dist/server/index.js`. These build outputs are generated and ignored by Git.
+The root frontend connects to the Cloudflare Workers backend for GitHub Pages. Upload `index.html`, `styles.css`, `qrcode.js` and `app.js` together. Alternatively, `node build-pages.mjs` copies them into `docs/`; set `DAM_API_ORIGIN` to use a different HTTPS backend, and configure its exact frontend-origin allowlist. `node build.mjs` embeds the split frontend into the self-contained Worker in `worker/index.js` and `dist/server/index.js`. These build outputs are generated and ignored by Git.
 
 Both voting rounds publicly show student choices and conditional reasons on the host map. The final comparison and CSV contain anonymous aggregate results. Students see possible role pros and cons during the first vote; guides retain their facilitation arguments. Phase changes remain host-controlled, including when a timer expires.
 
@@ -52,4 +52,4 @@ Both voting rounds publicly show student choices and conditional reasons on the 
 
 All village roles and future impacts are illustrative, not site assessments, numerical forecasts or paper-specific predictions. Both dam benefits and costs are displayed, as are alternative opportunities and limitations. The original class-uploaded PDFs and screenshot were not available during creation; students should supply evidence from their assigned readings.
 
-QR codes are generated locally using the MIT-licensed qrcode-generator by Kazuhiko Arase (the license notice is preserved in index.html and the source archive). UCSB navy and gold follow the public digital palette: https://brand.ucsb.edu/visual-identity/color. Original coast/tower artwork identifies a student project.
+QR codes are generated locally using the MIT-licensed qrcode-generator by Kazuhiko Arase (the license notice is preserved in qrcode.js and the source archive). UCSB navy and gold follow the public digital palette: https://brand.ucsb.edu/visual-identity/color. Original coast/tower artwork identifies a student project.

@@ -6,15 +6,15 @@ Interactive classroom stakeholder discussion about water, hydropower and alterna
 
 ## Open the app
 
-- Students: https://the-dam-village.yuyaoguo.workers.dev/
-- Host: https://the-dam-village.yuyaoguo.workers.dev/admin
-- Group guides: https://the-dam-village.yuyaoguo.workers.dev/guide
+- Students: https://yuyaoguo0310.github.io/the-dam-village/
+- Host: https://yuyaoguo0310.github.io/the-dam-village/?view=host
+- Group guides: https://yuyaoguo0310.github.io/the-dam-village/?view=guide
 
-Backup GitHub Pages entries: [Students](https://yuyaoguo0310.github.io/the-dam-village/), [Host](https://yuyaoguo0310.github.io/the-dam-village/?view=host), [Group guides](https://yuyaoguo0310.github.io/the-dam-village/?view=guide).
+Backup Cloudflare entries: [Students](https://the-dam-village.yuyaoguo.workers.dev/), [Host](https://the-dam-village.yuyaoguo.workers.dev/admin), [Group guides](https://the-dam-village.yuyaoguo.workers.dev/guide).
 
 Host creates a classroom, saves their recovery key privately, and shares **Join QR** or the six-character room code. Four student stakeholder groups are balanced automatically. Guides join separately and do not vote. The host controls both votes, discussion, debate, anonymous change comparison and illustrative future animations.
 
-The main app serves both its frontend and API from the same Cloudflare Workers domain and uses a persistent D1 database for multi-device synchronization. The backup GitHub Pages frontend connects to the same backend. Existing rooms in the previous backend are not automatically copied to this database. Recovery keys are saved separately on each website origin; use the same room code and recovery key to rejoin when switching between the Cloudflare and GitHub Pages entries.
+The main frontend is hosted on GitHub Pages and connects to the Cloudflare Workers backend at https://the-dam-village.yuyaoguo.workers.dev, with a persistent D1 database for multi-device synchronization. The backup Cloudflare pages use the same backend. Existing rooms in the previous backend are not automatically copied to this database. Recovery keys are saved separately on each website origin; use the same room code and recovery key to rejoin when switching between the Cloudflare and GitHub Pages entries.
 
 ## Original complete source
 

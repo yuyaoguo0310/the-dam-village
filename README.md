@@ -20,7 +20,33 @@ Download and extract **The-Dam-Village-Source.zip** in this repository. It conta
 
 With Node 18+ in the extracted project, `node server.mjs` runs a local backup. `node --test tests/*.test.mjs` verifies the classroom logic. `node build.mjs` builds the dependency-free Worker; `node build-pages.mjs` produces the GitHub Pages frontend. Read README.md and GITHUB-PAGES.md in the source archive for rejoin and hosting details.
 
-The root **index.html** is the complete deployed GitHub Pages frontend and can be edited directly here. For a different backend, change the `dam-api-origin` meta value and configure its exact frontend-origin allowlist.
+The current folder contains the complete editable project. The frontend has been split without changing its styles or application logic:
+
+- `index.html`: page structure and backend-origin setting.
+- `styles.css`: all original styles and responsive/animation rules.
+- `qrcode.js`: original MIT-licensed QR generator.
+- `app.js`: all classroom screens, interaction, synchronization, voting and map stories.
+- `engine.mjs`: classroom rules, roles, allocation and vote statistics.
+- `api.mjs`: authenticated API and D1 storage.
+- `server.mjs`: local server and persistent local storage.
+- `build.mjs` / `build-pages.mjs`: Worker and GitHub Pages builds.
+- `tests/`: original classroom, conditional-vote, role and story checks.
+- `drizzle/`, `wrangler.toml`, `.openai/hosting.json`: original database and hosting configuration.
+
+With Node 18+ installed, run these commands from this folder (no dependency installation required):
+
+```sh
+node server.mjs
+node --test tests/*.test.mjs
+node build.mjs
+node build-pages.mjs
+```
+
+Local entry: `http://localhost:8787/`; host: `/admin`; guides: `/guide`. The local server uses its own API and saves rooms in `.local/rooms.json`. That directory is private and ignored by Git.
+
+The root frontend retains the existing hosted backend for GitHub Pages. Upload `index.html`, `styles.css`, `qrcode.js` and `app.js` together. Alternatively, `node build-pages.mjs` copies them into `docs/`; set `DAM_API_ORIGIN` to use a different HTTPS backend, and configure its exact frontend-origin allowlist. `node build.mjs` embeds the split frontend into the self-contained Worker in `worker/index.js` and `dist/server/index.js`. These build outputs are generated and ignored by Git.
+
+Both voting rounds publicly show student choices and conditional reasons on the host map. The final comparison and CSV contain anonymous aggregate results. Students see possible role pros and cons during the first vote; guides retain their facilitation arguments. Phase changes remain host-controlled, including when a timer expires.
 
 ## Teaching context
 

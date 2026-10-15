@@ -1,0 +1,9 @@
+name = "the-dam-village"
+main = "worker/index.js"
+compatibility_date = "2026-10-13"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dam-village"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "drizzle"

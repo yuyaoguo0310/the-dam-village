@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {webcrypto} from 'node:crypto';import {newRoom,join,change,view} from '../engine.mjs';globalThis.crypto??=webcrypto;
+test('both rounds require conditions; host sees current public choices, peers do not',()=>{
+const r=newRoom('ABC123','host',[{hash:'g'}]);join(r,'s',{name:'A'});join(r,'peer',{name:'B'});change(r,'host','advance');
+for(const condition of [undefined,'','     ','short','x'.repeat(181)])assert.throws(()=>change(r,'s','vote',{choice:'conditions',publicVote:true,condition}),{status:400});assert.equal(view(r,'host').submitted[0],0);
+assert.throws(()=>change(r,'s','vote',{choice:'support'}),{status:409});
+change(r,'s','vote',{choice:'conditions',publicVote:true,condition:'  Protect\n downstream   flows.  '});assert.equal(view(r,'host').roster[0].condition,'Protect downstream flows.');assert.equal(view(r,'host').roster[0].choice,'conditions');assert(!('choice' in view(r,'peer').roster[0]));
+change(r,'s','vote',{choice:'oppose',publicVote:true});assert.equal(view(r,'s').me.conditions[0],null);change(r,'peer','vote',{choice:'support',publicVote:true});
+change(r,'host','advance');change(r,'host','advance');change(r,'host','advance');assert.equal(view(r,'host').roster[0].choice,null);assert.throws(()=>change(r,'s','vote',{choice:'conditions',publicVote:true}),{status:400});
+change(r,'s','vote',{choice:'conditions',condition:'Compensate affected residents.',publicVote:true});change(r,'peer','vote',{choice:'support',publicVote:true});change(r,'host','advance');assert.equal(view(r,'host').roster[0].condition,'Compensate affected residents.');assert.equal(view(r,'host').results.paired,2);
+});
+test('legacy private ballots remain private and unfinished conditional ballots need a reason',()=>{const r=newRoom('ABC123','host',[]);join(r,'s',{name:'A'});r.phase='first-vote';r.participants.s.votes[0]='conditions';delete r.participants.s.votePublic;assert.equal(view(r,'host').roster[0].choice,null);assert.equal(view(r,'host').submitted[0],0);assert.throws(()=>change(r,'host','advance'),{status:409});r.phase='results';assert.equal(view(r,'host').results.before[2],1);assert.equal(view(r,'host').roster[0].choice,null);});

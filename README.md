@@ -6,13 +6,15 @@ Interactive classroom stakeholder discussion about water, hydropower and alterna
 
 ## Open the app
 
-- Students: https://yuyaoguo0310.github.io/the-dam-village/
-- Host: https://yuyaoguo0310.github.io/the-dam-village/?view=host
-- Group guides: https://yuyaoguo0310.github.io/the-dam-village/?view=guide
+- Students: https://the-dam-village.yuyaoguo.workers.dev/
+- Host: https://the-dam-village.yuyaoguo.workers.dev/admin
+- Group guides: https://the-dam-village.yuyaoguo.workers.dev/guide
+
+Backup GitHub Pages entries: [Students](https://yuyaoguo0310.github.io/the-dam-village/), [Host](https://yuyaoguo0310.github.io/the-dam-village/?view=host), [Group guides](https://yuyaoguo0310.github.io/the-dam-village/?view=guide).
 
 Host creates a classroom, saves their recovery key privately, and shares **Join QR** or the six-character room code. Four student stakeholder groups are balanced automatically. Guides join separately and do not vote. The host controls both votes, discussion, debate, anonymous change comparison and illustrative future animations.
 
-This GitHub Pages frontend connects to a persistent HTTPS backend for multi-device synchronization. The public browser address uses github.io. The backend is deployed to Cloudflare Workers at https://the-dam-village.yuyaoguo.workers.dev and uses a D1 database in the project owner’s Cloudflare account. Existing rooms in the previous backend are not automatically copied to this database.
+The main app serves both its frontend and API from the same Cloudflare Workers domain and uses a persistent D1 database for multi-device synchronization. The backup GitHub Pages frontend connects to the same backend. Existing rooms in the previous backend are not automatically copied to this database. Recovery keys are saved separately on each website origin; use the same room code and recovery key to rejoin when switching between the Cloudflare and GitHub Pages entries.
 
 ## Original complete source
 
